@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import Greeting from '../Greeting/Greeting';
 
 function App() {
   
@@ -6,7 +7,7 @@ function App() {
  
 
   
-  return 
+  return Greeting;
 }
 
 export default App;
