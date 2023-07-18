@@ -6,9 +6,10 @@ import Greeting from './components/Greeting/Greeting';
 import Text from './components/TodoList/TodoList';
 import reportWebVitals from './reportWebVitals';
 import Scene from '../src/components/Scene/Scene';
+import TodoList from './components/TodoList/TodoList';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Scene />
+    <TodoList />
 );
 

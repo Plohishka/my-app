@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import TodoItem from './TodoItem';
 
 
-function TodoList() {
+function TodoList(props) {
 
-   const arr = [
+    const arr = [
         {
             id: '1',
             text: 'go to walk'
@@ -19,26 +20,23 @@ function TodoList() {
     ]
 
     const [notes, setNotes] = useState(arr);
-  
+
     function remove(id) {
         setNotes(notes.filter((note) => {
             return note.id !== id;
         }))
     }
-    
 
-        const res =  notes.map((note) => <li key={note.id}>
-            <span>{note.text}</span> 
-        <button onClick={() => remove(note.id)}>
-            delete
-        </button>
-        </li>);
-
-    
+    const res = notes.map((note) => {
+        return <TodoItem
+            id={note.id}
+            text={note.text}
+            remove={remove}
+        />
+    })
 
     return <ul>
         {res}
-        
     </ul>
 
 
