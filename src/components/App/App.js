@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import Text from '../TodoList/TodoList';
 import Greeting from '../Greeting/Greeting';
+import Example from '../Example/Example';
 
 function App() {
   
@@ -9,7 +10,7 @@ function App() {
 
    
 
-  return <Text/>
+  return <Example/>
 
 }
 

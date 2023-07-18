@@ -5,13 +5,10 @@ import App from './components/App/App'
 import Greeting from './components/Greeting/Greeting';
 import Text from './components/TodoList/TodoList';
 import reportWebVitals from './reportWebVitals';
+import Scene from '../src/components/Scene/Scene';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <App />
+    <Scene />
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
