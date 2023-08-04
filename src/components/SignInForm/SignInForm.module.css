@@ -1,0 +1,14 @@
+.formWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    border: 2px solid black;
+}
+
+.formWrapper label {
+    margin: 10px;
+}
+
+.invalid {
+    border: 2px solid red;
+}

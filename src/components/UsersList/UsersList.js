@@ -9,13 +9,37 @@ class UsersList extends React.Component {
 
         this.state = {
             users: [],
-            userCount: 10,
-            filteredUsers: []
+            userCount: 100,
+            filteredUsers: [],
+            page: 1
         }
     }
 
+    prevBtnHand = () => {
+        if (this.state.page > 1) {
+            this.setState({
+                page: this.state.page - 1
+            })
+        }
+    }
+
+    nextBtnHand = () => {
+        this.setState({
+            page: this.state.page + 1
+        })
+    }
+
     componentDidMount() {
-        {this.loadUsers()};
+        const {userCount, page} = this.state;
+        {this.loadUsers(userCount, page)};
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        const {userCount, page} = this.state;
+
+        if (prevState.page !== page) {
+            this.loadUsers(userCount, page);
+        }
     }
 
     renderUsers = () => {
@@ -34,8 +58,8 @@ class UsersList extends React.Component {
         })
     }
 
-    loadUsers = () => {
-        getUsers(this.state.userCount)
+    loadUsers = (userCount, page) => {
+        getUsers(userCount, page)
             .then((data) => {
                 const { results } = data;
                 this.setState({
@@ -83,6 +107,8 @@ class UsersList extends React.Component {
                         Search users:
                         <input type='text' onChange={this.searchHandler}/>
                     </label>
+                    <button onClick={this.prevBtnHand}>Previos page</button>
+                    <button onClick={this.nextBtnHand}>Next page</button>
                 </form>
 
                 <section className={styles.container}>
