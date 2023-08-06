@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import SignUpForm from '../SignUpForm/SignUpForm'
-
+import NewCounterFunction from '../NewCounter/NewCounterFunction';
 
 class App extends Component {
 
   render() {
     return (
-     <SignUpForm/>
+     <NewCounterFunction/>
     )
   }
 }
