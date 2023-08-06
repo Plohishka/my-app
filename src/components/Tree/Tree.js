@@ -1,21 +1,18 @@
 import React from 'react';
 import cx from 'classnames';
 import Parent from './Parent/Parent';
-import { ThemeContext } from '../../contexts/themeContext';
+import { withTheme } from '../../HOC';
 import style from './Tree.module.css';
 import CONSTANTS from '../../constants';
 const {THEMES} = CONSTANTS;
 
 const Tree = (props) => {
-    return (
-        <ThemeContext.Consumer>
-
-            {({ theme, setTheme }) => {
+    
 
                 const classNames = cx(style.container, {
                     // [style.container]: true,
-                    [style.lightTheme]: theme === THEMES.LIGHT,
-                    [style.darkTheme]: theme === THEMES.DARK
+                    [style.lightTheme]: props.theme === THEMES.LIGHT,
+                    [style.darkTheme]: props.theme === THEMES.DARK
                 })
                 return (
                     <div className={classNames}>
@@ -24,10 +21,9 @@ const Tree = (props) => {
                     </div>
 
                 )
-            }}
-        </ThemeContext.Consumer>
-
-    )
+      
 }
 
-export default Tree;
+const TreeWithTheme = withTheme(Tree);
+
+export default TreeWithTheme;

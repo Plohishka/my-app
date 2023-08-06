@@ -1,28 +1,28 @@
 import React from 'react';
 import Child from './Child/Child';
-import { ThemeContext } from '../../../../contexts/themeContext';
+import { withTheme, withUser } from '../../../../HOC';
 import CONSTANTS from '../../../../constants';
 
 const { THEMES } = CONSTANTS;
 
 const Subparent = (props) => {
+
+    const nextTheme = props.theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
+
     return (
-        <ThemeContext.Consumer>
-            {({ theme, setTheme }) => {
-
-                const nextTheme = theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
-
-                return (
-                    <div>
-                        Subparent
-                        <button onClick={() => {setTheme(nextTheme)}}>Click to change theme</button>
-                        <Child />
-                    </div>
-                )
-            }}
-        </ThemeContext.Consumer>
-
-    );
+        <div style={{ border: '3px solid black', padding: '25px' }}>
+            Subparent
+            <p>{props.user.firstName} {props.user.lastName}</p>
+            <button onClick={() => { props.setTheme(nextTheme) }}>Click to change theme</button>
+            <Child />
+        </div>
+    )
+    
 }
 
-export default Subparent;
+/* const SubparentWithTheme = withTheme(Subparent);
+const SubparentWithThemeWithUser = withUser(SubparentWithTheme); */
+
+export default withUser(withTheme(Subparent));
+
+
