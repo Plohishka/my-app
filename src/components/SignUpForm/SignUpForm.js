@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
-import * as yup from 'yup';
+import styles from './SignUpFormStyle.module.css';
+import { SCHEMA } from '../../schemas';
 
-const SCHEMA = yup.object({
-    firstName: yup.string().min(1).max(30),
-    lastName: yup.string().min(1).max(30),
-    email: yup.string().required().email(),
-    password: yup.string().required().matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/)
-})
 
 const initialState = {
     email: '',
@@ -19,7 +14,8 @@ class SignUpForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ...initialState
+            ...initialState,
+            error: null
         }
     }
 
@@ -31,11 +27,23 @@ class SignUpForm extends Component {
 
     submitHandler = (event) => {
         event.preventDefault();
-        console.log(SCHEMA.isValidSync(this.state));
+        // validateSync => object / error
+        // isValidSync => boolean
+        try {
+            this.setState({
+                error: null
+            })
+
+            SCHEMA.validateSync(this.state);
+        } catch (error) {
+            this.setState({
+                error
+            })
+        }
     }
 
     render() {
-        const { email, password, firstName, lastName } = this.state;
+        const { email, password, firstName, lastName, error } = this.state;
         return (
             <form onSubmit={this.submitHandler}>
                 <input type='text' name='firstName' placeholder='firstName' value={firstName} onChange={this.changeHandler} />
@@ -43,6 +51,7 @@ class SignUpForm extends Component {
                 <input type='text' name='email' placeholder='email' value={email} onChange={this.changeHandler} />
                 <input type='text' name='password' placeholder='password' value={password} onChange={this.changeHandler} />
                 <button type='submit'>Send form</button>
+                {error && <p className={styles.error}>{error.message}</p>}
             </form>
         );
     }
