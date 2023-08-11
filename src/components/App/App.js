@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import NewCounterFunction from '../NewCounter/NewCounterFunction';
+import MouseTracker from '../MouseTracker/MouseTracker';
 
 class App extends Component {
 
   render() {
     return (
-     <NewCounterFunction/>
+     <MouseTracker/>
     )
   }
 }
