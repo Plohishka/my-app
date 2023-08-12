@@ -1,28 +1,35 @@
 import React, { useState, useEffect } from 'react';
+import { format, addSeconds } from 'date-fns';
 
 function Counter() {
 
 
-    const [count, setCount] = useState(0);
-    const [intervalId, setIntervalId] = useState(null);
+    const [time, setTime] = useState(new Date(0,0,0,0,0,0,0));
+    const [isRunning, setIsRunning] = useState(true);
+
+    let intervalId = null;
 
     useEffect(() => {
-        const intervalId = setInterval(() => {
-
-            setCount(count => count + 1);
-
-        }, 1000)
-        return () => {                        // componentWillUnmount
-            clearInterval(intervalId);
+        if (isRunning) {
+            intervalId = setInterval(() => {
+                setTime(time => addSeconds(time, 1));
+            }, 1000)
+            return () => {                        // componentWillUnmount
+                clearInterval(intervalId);
+            }
         }
 
-    }, [])                                    // [] - componentDidMount
+    }, [isRunning])                                    // [] - componentDidMount
 
+    const switchRunning = () => {
+        setIsRunning(!isRunning);
+    }
 
     return (
-        <h1>
-            {count}
-        </h1>
+        <>
+            <h1>{format(time, 'HH:mm:ss')}</h1>
+            <button onClick={switchRunning}>{isRunning ? 'Stop' : 'Start'}</button>
+        </>
     );
 }
 
