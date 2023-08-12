@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
-import UsersList from '../UsersList/UsersList';
-import NewUserList from '../UsersList/NewUserList';
+import React from 'react';
+import CounterPage from '../Counter/CounterPage';
 
 
-class App extends Component {
 
-  render() {
-    return (
-     <NewUserList/>
-    )
-  }
+function App () {
+
+
+  return (
+    <CounterPage/>
+  )
 }
 
 export default App;

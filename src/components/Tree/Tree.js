@@ -4,24 +4,24 @@ import Parent from './Parent/Parent';
 import { withTheme } from '../../HOC';
 import style from './Tree.module.css';
 import CONSTANTS from '../../constants';
-const {THEMES} = CONSTANTS;
+const { THEMES } = CONSTANTS;
 
 const Tree = (props) => {
-    
 
-                const classNames = cx(style.container, {
-                    // [style.container]: true,
-                    [style.lightTheme]: props.theme === THEMES.LIGHT,
-                    [style.darkTheme]: props.theme === THEMES.DARK
-                })
-                return (
-                    <div className={classNames}>
-                        Tree
-                        <Parent />
-                    </div>
 
-                )
-      
+    const classNames = cx(style.container, {
+        // [style.container]: true,
+        [style.lightTheme]: props.theme === THEMES.LIGHT,
+        [style.darkTheme]: props.theme === THEMES.DARK
+    })
+    return (
+        <div className={classNames}>
+            Tree
+            <Parent />
+        </div>
+
+    )
+
 }
 
 const TreeWithTheme = withTheme(Tree);
