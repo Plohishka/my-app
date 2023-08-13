@@ -1,55 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { useData } from '../DataProvider/DataProvider';
 
-class PhonesLoader extends Component {
-    constructor(props) {
-        super(props);
+function PhonesLoader(props) {
 
-        this.state = {
-            phones: [],
-            isLoading: true,
-            error: null
-        }
-    }
+    const { data, isLoading, error } = useData(getPhones);
 
-    componentDidMount() {
-        this.load();
-    }
-
-    load = () => {
-        fetch('./phones.json')
+    function getPhones() {
+        return fetch('./phones.json')
             .then((response) => response.json())
-            .then((phones) => {
-                this.setState({
-                    phones
-                })
-            })
-            .catch((error) => {
-                this.setState({
-                    error
-                })
-            })
-            .finally(() => {
-                this.setState({
-                    isLoading: false
-                })
-            })
     }
 
-
-    render() {
-        const { phones, isLoading, error } = this.state;
-        return (
-            <>
-                {isLoading && <div>Loading...</div>}
-                {error && <div>Error happening: {error.message}</div>}
-                <ul>
-                    {phones.map((phone) => 
-                        <li key={`${Date.now()} ${phone.brand} ${phone.model}`}>{phone.brand} - {phone.model}. Price: {phone.price}</li>
-                    )}
-                </ul>
-            </>
-        )
-    }
+    return (
+        <>
+            {isLoading && <div>Loading...</div>}
+            {error && <div>Error happening: {error.message}</div>}
+            <ul>
+                {data.map((data) =>
+                    <li key={`${Date.now()} ${data.brand} ${data.model}`}>{data.brand} - {data.model}. Price: {data.price}</li>
+                )}
+            </ul>
+        </>
+    )
 }
 
 export default PhonesLoader;
